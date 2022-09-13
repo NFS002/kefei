@@ -3,13 +3,13 @@
 ### Kefei is a simple and easy alternative...
 
 ```kotlin
-class PersistentClass: Persistable() {
+class MyClass: Persistable() {
 
     @Persist
-    lateinit var someList: MutableList<String>
+    lateinit var myImportantList: MutableList<String>
 
     @Persist
-    lateinit var someStr: String
+    lateinit var myImportantStr: String
     
     /* Whatever else you want... */
 }
