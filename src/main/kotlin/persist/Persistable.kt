@@ -89,12 +89,12 @@ abstract class Persistable {
                                         val v = adapter.fromJson(json)
                                         javaField.trySetAccessible()
                                         javaField.set(this, v)
-                                        log.debug { "Set value '${v.toString().subSequence(0, 10)}' for: $field" }
+                                        log.info { "Set value '${v.logf()}' for: $field" }
                                     }
                                 }
                             }
                             this.fields.add(pfield)
-                            log.debug { "Added persistent field '${field.toString().subSequence(0, 10)}' to state" }
+                            log.debug { "Added persistent field '${field.logf()}' to state" }
                         }
                     }
                 }
@@ -112,14 +112,14 @@ abstract class Persistable {
     fun writeBack(pfield: PersistentField) {
         val adapter = moshi.adapter<Any>(pfield.field.type)
         val v = adapter.toJson(pfield.field.get(this))
-        log.info {  "Saving value '${v.toString().subSequence(0, 10)}' $pfield "}
+        log.info {  "Saving value '${v.logf()}' $pfield "}
         pfield.file.writeText(v)
     }
 
 
     private fun readTextFromFile(field: PersistentField) : String {
         val str = field.file.readLines().joinToString(separator = "")
-        log.debug { "Read '${str.subSequence(0, 10)}' from file" }
+        log.debug { "Read '${str.logf()}' from file" }
         return str
     }
 
