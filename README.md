@@ -1,6 +1,6 @@
 # Kefei
 ## Is it just me or are databases a bit of a ballache ?!?!
-### Kefei is a simple and easy alternative to a database using minimal code
+### Kefei is a simple and easy alternative...
 
 ```kotlin
 class PersistentClass: Persistable() {
