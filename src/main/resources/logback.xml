@@ -1,0 +1,21 @@
+<configuration>
+
+    <property name="HOME_LOG" value="logs/kefei.log"/>
+
+    <appender name="FILE-APPENDER" class="ch.qos.logback.core.FileAppender">
+        <file>${HOME_LOG}</file>
+        <append>true</append>
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} MDC=%X{user} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <root level="debug">
+        <appender-ref ref="FILE-APPENDER" />
+    </root>
+
+    <logger name="com.mkyong" level="debug" additivity="false">
+        <appender-ref ref="FILE-APPENDER"/>
+    </logger>
+
+</configuration>
