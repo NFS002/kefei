@@ -10,6 +10,8 @@ class PersistentClass: Persistable() {
 
     @Persist
     lateinit var someStr: String
+    
+    /* More stuff... */
 }
 ```
 
