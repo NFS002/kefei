@@ -16,20 +16,18 @@ import kotlin.text.RegexOption.DOT_MATCHES_ALL
 
 abstract class Persistable {
 
-    private val log = KotlinLogging.logger{}
+    private val log = KotlinLogging.logger {}
 
     companion object {
 
-        var options:Properties = loadOptions()
-
-
+        var options: Properties = loadOptions()
 
         init {
             options = loadOptions()
         }
 
-        private fun loadOptions() : Properties {
-            val log:KLogger = KotlinLogging.logger {  }
+        private fun loadOptions(): Properties {
+            val log: KLogger = KotlinLogging.logger { }
             val ops = Properties()
             val defaultConfigPath = "~/.kefei/system-options.properties"
             val configPath = System.getenv("KEFEI__SYSTEM_PATH") ?: defaultConfigPath
@@ -40,10 +38,10 @@ abstract class Persistable {
                 }
             }
             res.onFailure {
-                log.error { "Failed to load system configuration: ${it}"}
+                log.error { "Failed to load system configuration: ${it}" }
             }
             res.onSuccess {
-              log.info { "Loaded system configuration" }
+                log.info { "Loaded system configuration" }
             }
 
             return ops
@@ -53,11 +51,11 @@ abstract class Persistable {
 
     private val moshi: Moshi = Moshi.Builder().addLast(KotlinJsonAdapterFactory()).build()
 
-    private val fields:MutableList<PersistentField> = mutableListOf()
+    private val fields: MutableList<PersistentField> = mutableListOf()
 
     init {
         log.debug { "Instantiating persistable class of ${this::class.qualifiedName} with options ${options}" }
-        val setValues:Boolean = options.getProperty("init.load", "true").toBoolean()
+        val setValues: Boolean = options.getProperty("init.load", "true").toBoolean()
 
         this.load(setValues = setValues)
         if (options.getProperty("shutdown.save", "true").toBoolean()) {
@@ -66,7 +64,7 @@ abstract class Persistable {
     }
 
     /* Load from file */
-    fun load(name:String = ".*", setValues:Boolean=true) {
+    fun load(name: String = ".*", setValues: Boolean = true) {
         val classFields = this::class.declaredMemberProperties
         log.info { "Loading persistent fields matching ${name} from ${classFields.size}" }
         for (field in classFields) {
@@ -112,12 +110,12 @@ abstract class Persistable {
     fun writeBack(pfield: PersistentField) {
         val adapter = moshi.adapter<Any>(pfield.field.type)
         val v = adapter.toJson(pfield.field.get(this))
-        log.info {  "Saving value '${v.logf()}' $pfield "}
+        log.info { "Saving value '${v.logf()}' $pfield " }
         pfield.file.writeText(v)
     }
 
 
-    private fun readTextFromFile(field: PersistentField) : String {
+    private fun readTextFromFile(field: PersistentField): String {
         val str = field.file.readLines().joinToString(separator = "")
         log.debug { "Read '${str.logf()}' from file" }
         return str

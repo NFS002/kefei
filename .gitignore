@@ -3,6 +3,8 @@
 gradle
 gradlew.bat
 
+# IDE
+.idea
 
 # Ignore Gradle build output directory
 build

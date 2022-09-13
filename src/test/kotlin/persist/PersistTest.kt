@@ -13,7 +13,8 @@ class PersistTest {
 
 
     @Before
-    fun before() { dir.exists().then {
+    fun before() {
+        dir.exists().then {
             dir.deleteRecursively()
         }
     }

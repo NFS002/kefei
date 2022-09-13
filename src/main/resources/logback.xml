@@ -11,7 +11,7 @@
     </appender>
 
     <root level="debug">
-        <appender-ref ref="FILE-APPENDER" />
+        <appender-ref ref="FILE-APPENDER"/>
     </root>
 
     <logger name="com.mkyong" level="debug" additivity="false">
