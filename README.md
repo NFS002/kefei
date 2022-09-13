@@ -6,12 +6,12 @@ class PersistentClass: Persistable() {
 
     @Persist
     lateinit var someList: MutableList<String>
-    
-    ...
 
     @Persist
     lateinit var someStr: String
-...    
+    
+    
+    ...    
 }
 
 
