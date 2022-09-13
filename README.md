@@ -11,7 +11,7 @@ class PersistentClass: Persistable() {
     @Persist
     lateinit var someStr: String
     
-    /*. Whatever else you want... */
+    /* Whatever else you want... */
 }
 ```
 
